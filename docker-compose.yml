@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  gotenberg:
+    image: gotenberg/gotenberg:8
+    ports:
+      - "3500:3000"
+  mineru-api:
+    container_name: mineru-api
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - "GOTENBERG_URL=http://gotenberg:3000"
+    depends_on:
+      - gotenberg
+    volumes:
+      - .:/app

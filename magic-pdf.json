@@ -1,0 +1,6 @@
+{
+    "bucket_info":{},
+    "temp-output-dir":"/tmp",
+    "models-dir":"/root/PDF-Extract-Kit/models",
+    "device-mode":"cpu"
+}
