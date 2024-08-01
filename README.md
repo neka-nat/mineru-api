@@ -20,8 +20,11 @@ curl -X PUT http://localhost:3000/api/parse -F "file=@/path/to/file.pdf"
 
 Or access `http://localhost:3000/docs` in your browser.
 
+### Demo movie (x16)
+![demo16](demo16.gif)
 
 ## ToDo
 
 - [ ] Download images
+- [ ] Use GPU
 - [ ] Utility for deploying to public cloud
