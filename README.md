@@ -26,5 +26,5 @@ Or access `http://localhost:3000/docs` in your browser.
 ## ToDo
 
 - [ ] Download images
-- [ ] Use GPU
+- [x] Use GPU
 - [ ] Utility for deploying to public cloud
