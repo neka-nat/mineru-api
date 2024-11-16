@@ -2,5 +2,20 @@
     "bucket_info":{},
     "temp-output-dir":"/tmp",
     "models-dir":"/root/PDF-Extract-Kit/models",
-    "device-mode":"cpu"
+    "layoutreader-model-dir":"/root/layoutreader",
+    "device-mode":"cpu",
+    "layout-config": {
+        "model": "layoutlmv3"
+    },
+    "formula-config": {
+        "mfd_model": "yolo_v8_mfd",
+        "mfr_model": "unimernet_small",
+        "enable": true
+    },
+    "table-config": {
+        "model": "rapid_table",
+        "enable": false,
+        "max_time": 400
+    },
+    "config_version": "1.0.0"
 }
