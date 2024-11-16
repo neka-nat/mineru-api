@@ -1,17 +1,20 @@
-ARG PYTHON_ENV=python:3.10-slim
 ARG POETRY_VERSION=1.6.1
 
-FROM $PYTHON_ENV as build
+FROM nvidia/cuda:12.1.0-cudnn8-devel-ubuntu22.04
 # Allow statements and log messages to immediately appear in the logs
 ENV PYTHONUNBUFFERED True
 
-RUN apt-get update && \
-    apt-get install --yes --no-install-recommends curl g++ libopencv-dev && \
-    rm -rf /var/lib/apt/lists/*
-RUN curl -sSL https://install.python-poetry.org | POETRY_VERSION=${POETRY_VERSION} python3 -
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update && apt-get install -y tzdata
+ENV TZ Asia/Tokyo
 
-RUN mkdir -p /app
-WORKDIR /app
+RUN apt-get update && \
+    apt-get install --yes --no-install-recommends curl g++ libopencv-dev python3.10 && \
+    rm -rf /var/lib/apt/lists/*
+RUN curl -sSL https://install.python-poetry.org | POETRY_VERSION=${POETRY_VERSION} python3.10 -
+
+ENV APP_HOME /app
+WORKDIR $APP_HOME
 
 COPY pyproject.toml poetry.lock ./
 
@@ -19,25 +22,9 @@ ENV PATH="/root/.local/bin:$PATH"
 RUN poetry config virtualenvs.create false && \
     poetry install --no-interaction --no-root
 
-FROM nvidia/cuda:12.1.0-cudnn8-devel-ubuntu22.04 as prod
-
-RUN apt-get update && \
-    apt-get install --yes --no-install-recommends python3.10 && \
-    rm -rf /var/lib/apt/lists/*
-
-# Allow statements and log messages to immediately appear in the logs
-ENV PYTHONUNBUFFERED True
-# Copy local code to the container image.
-ENV APP_HOME /app
-WORKDIR $APP_HOME
 COPY . ./
 COPY magic-pdf.gpu.json /root/magic-pdf.json
 
-COPY --from=build /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
-COPY --from=build /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu
-COPY --from=build /usr/local/bin/magic-pdf /usr/local/bin/magic-pdf
-COPY --from=build /usr/local/bin/uvicorn /usr/local/bin/uvicorn
-
-RUN python download_models.py
+RUN python3.10 download_models.py
 
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "3000"]
