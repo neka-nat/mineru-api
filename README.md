@@ -8,6 +8,8 @@ API server for [MinerU](https://github.com/opendatalab/MinerU).
 git clone https://github.com/neka-nat/mineru-api.git --recurse
 cd mineru-api
 docker compose up
+# GPU
+docker compose up -f docker-compose.gpu.yml
 ```
 
 ## Request parsing
