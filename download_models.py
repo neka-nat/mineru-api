@@ -9,7 +9,7 @@ mineru_patterns = [
     "models/TabRec/StructEqTable/*",
 ]
 model_dir = snapshot_download(
-    "opendatalab/PDF-Extract-Kit",
+    "opendatalab/PDF-Extract-Kit-1.0",
     local_dir="/root/PDF-Extract-Kit",
     allow_patterns=mineru_patterns,
 )

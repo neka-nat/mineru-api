@@ -24,7 +24,7 @@ webdataset = "^0.2.86"
 torch = "2.3.0"
 numpy = "1.26.4"
 iopath = ">=0.1.7,<0.1.10"
-modelscope = "^1.16.1"
+modelscope = "^1.20.1"
 
 [[tool.poetry.source]]
 name = "myhloli"
