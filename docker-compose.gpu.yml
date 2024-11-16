@@ -7,7 +7,9 @@ services:
       - "3500:3000"
   mineru-api:
     container_name: mineru-api
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.gpu
     ports:
       - "3000:3000"
     environment:
