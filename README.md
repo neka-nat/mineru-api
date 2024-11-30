@@ -5,7 +5,7 @@ API server for [MinerU](https://github.com/opendatalab/MinerU).
 ## Quick Start
 
 ```bash
-git clone https://github.com/neka-nat/mineru-api.git --recurse
+git clone https://github.com/neka-nat/mineru-api.git
 cd mineru-api
 docker compose up
 # GPU
